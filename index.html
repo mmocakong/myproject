@@ -6,4 +6,249 @@
   <title>mmocakong | Portfolio</title>
   <style>
     :root {
-      --bg-gradient: radial-gradient(circle at top, #1f
+      --bg-gradient: radial-gradient(circle at top, #1f2933 0%, #020617 55%, #000000 100%);
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.25);
+      --accent-strong: #0ea5e9;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
+      --radius-xl: 24px;
+      --transition-fast: 180ms ease-out;
+      --transition-normal: 260ms ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1040px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.08), transparent 60%),
+                  rgba(15, 23, 42, 0.88);
+      border-radius: 32px;
+      border: 1px solid rgba(148,163,184,0.35);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      backdrop-filter: blur(24px);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 14px; }
+
+    .brand-logo {
+      width: 40px; height: 40px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      display: flex; justify-content: center; align-items: center;
+      box-shadow: 0 12px 30px rgba(56,189,248,0.65);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.07em;
+    }
+
+    nav { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .nav-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.7);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .nav-btn:hover {
+      background: rgba(30,64,175,0.9);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+    }
+
+    .hero-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 3.2vw, 32px);
+      margin-bottom: 10px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #38bdf8, #a855f7, #f97316);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn-primary, .btn-ghost {
+      padding: 10px 18px;
+      font-size: 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg,#38bdf8,#6366f1);
+      color: #0b1120;
+      border: none;
+      box-shadow: 0 12px 28px rgba(56,189,248,0.6);
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.85);
+      color: var(--text-main);
+    }
+
+    .btn-primary:hover, .btn-ghost:hover {
+      transform: translateY(-1px);
+    }
+
+    .side-column { display: flex; flex-direction: column; gap: 16px; }
+
+    .card-interactive {
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.6);
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      cursor: pointer;
+      transition: var(--transition-normal);
+    }
+
+    .card-interactive:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    footer {
+      padding-top: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+
+<body>
+<div class="page">
+  <header>
+    <div class="brand">
+      <div class="brand-logo">MM</div>
+      <div>
+        <strong>mmocakong</strong><br>
+        <span style="font-size:12px;color:#9ca3af;">Gamer Portfolio</span>
+      </div>
+    </div>
+
+    <nav>
+      <button class="nav-btn" data-scroll="#about">소개</button>
+      <button class="nav-btn" data-scroll="#contact">연락처</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-card">
+      <h1 class="hero-title">
+        안녕하세요, <span>mmocakong</span> 입니다.
+      </h1>
+
+      <p class="hero-subtitle">
+        전략을 세우고, 플레이를 분석하고, 팀과 함께 승리를 만들어 가는 게이머입니다.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-primary" data-scroll="#contact">협업 / 문의하기</button>
+        <button class="btn-ghost" data-scroll="#about">더 알아보기</button>
+      </div>
+    </section>
+
+    <aside class="side-column">
+      <section id="about" class="card-interactive">
+        <h3 style="font-size:14px;color:#9ca3af;">소개</h3>
+        <p style="font-size:13px;line-height:1.6;margin-top:8px;">
+          게임을 단순한 취미가 아닌 프로젝트처럼 접근하는 게이머입니다.
+          전략과 분석을 통해 매 판 더 나은 플레이를 만드는 것을 즐깁니다.
+        </p>
+      </section>
+
+      <section id="contact" class="card-interactive">
+        <h3 style="font-size:14px;color:#9ca3af;">연락처</h3>
+
+        <p style="margin-top:10px;font-size:13px;">
+          Email<br>
+          <a href="mailto:example@example.com" style="color:white;text-decoration:none;">
+            example@example.com
+          </a>
+        </p>
+
+        <p style="margin-top:10px;font-size:13px;">
+          GitHub<br>
+          <a href="https://github.com/mmocakong" target="_blank" style="color:white;text-decoration:none;">
+            github.com/mmocakong
+          </a>
+        </p>
+      </section>
+    </aside>
+  </main>
+
+  <footer>
+    <div>© <span id="year"></span> mmocakong · All rights reserved.</div>
+    <div>GitHub Pages</div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  document.querySelectorAll("[data-scroll]").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const t = document.querySelector(btn.dataset.scroll);
+      if (!t) return;
+      const y = t.getBoundingClientRect().top + window.scrollY - 40;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    });
+  });
+</script>
+</body>
+</html>
