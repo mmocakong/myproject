@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mocakong | Portfolio</title>
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at top, #1f2933 0%, #020617 55%, #000000 100%);
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.25);
+      --accent-strong: #0ea5e9;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
+      --radius-xl: 24px;
+      --transition-fast: 180ms ease-out;
+      --transition-normal: 260ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+      scroll-behavior: smooth;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1040px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.08), transparent 60%),
+                  rgba(15, 23, 42, 0.88);
+      border-radius: 32px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      padding: 28px 28px 20px;
+      backdrop-filter: blur(24px);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-logo::before {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand-logo span {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 11px;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-text strong {
+      font-size: 18px;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-text span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform 120ms ease-out;
+    }
+
+    .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    .nav-btn:hover {
+      background: rgba(30, 64, 175, 0.9);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    .hero-card {
+      padding: 24px;
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.25), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(129, 140, 248, 0.25), transparent 55%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.8);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+      width: fit-content;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.4);
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 3.2vw, 32px);
+      line-height: 1.25;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #38bdf8, #a855f7, #f97316);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .meta-item {
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      color: var(--text-muted);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .hero-actions {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 13px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 120ms ease-out,
+                  box-shadow var(--transition-fast),
+                  border-color var(--transition-fast),
+                  background var(--transition-fast),
+                  color var(--transition-fast);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #0b1120;
+      box-shadow: 0 12px 28px rgba(56, 189, 248, 0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(56, 189, 248, 0.75);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.85);
+      border-color: rgba(148, 163, 184, 0.7);
+      color: var(--text-main);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      background: rgba(30, 64, 175, 0.9);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+    }
+
+    /* Ripple effect for click */
+    .ripple-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple-circle {
+      position: absolute;
+      border-radius: 999px;
+      transform: scale(0);
+      animation: ripple 600ms linear;
+      background: rgba(248, 250, 252, 0.5);
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    .side-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card-interactive {
+      padding: 18px 18px 16px;
+      border-radius: var(--radius-xl);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.9);
+      position: relative;
+      cursor: pointer;
+      transition: transform var(--transition-normal),
+                  box-shadow var(--transition-normal),
+                  border-color var(--transition-fast),
+                  background var(--transition-fast);
+    }
+
+    .card-interactive::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.25), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+      pointer-events: none;
+    }
+
+    .card-interactive:hover {
+      transform: translateY(-4px) translateZ(0);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.95);
+      border-color: var(--accent);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .card-interactive.active {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 22px 55px rgba(15, 23, 42, 1);
+      border-color: var(--accent-strong);
+    }
+
+    .card-interactive.active::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .card-pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--accent);
+    }
+
+    .about-text {
+      font-size: 13px;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 13px;
+    }
+
+    .contact-item-label {
+      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .contact-link,
+    .contact-text {
+      color: var(--text-main);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      word-break: break-all;
+    }
+
+    .contact-link {
+      position: relative;
+    }
+
+    .contact-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #38bdf8, #6366f1);
+      transition: width 180ms ease-out;
+    }
+
+    .contact-link:hover::after {
+      width: 100%;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(51, 65, 85, 0.9);
+      margin: 4px 0 0;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-left span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-badge {
+      border-radius: 999px;
+      padding: 4px 9px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .page {
+        padding: 20px 18px 16px;
+        border-radius: 24px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      nav .nav-btn {
+        flex: 1;
+        justify-content: center;
+      }
+
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 18px 10px;
+      }
+
+      .hero-card,
+      .card-interactive {
+        border-radius: 18px;
+      }
+
+      .hero-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="top">
+    <header>
+      <div class="brand">
+        <div class="brand-logo">
+          <span>MK</span>
+        </div>
+        <div class="brand-text">
+          <strong>mocakong</strong>
+          <span>Gamer portfolio</span>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-btn ripple-btn" data-scroll="#about">
+          <span class="nav-dot"></span>
+          소개
+        </button>
+        <button class="nav-btn ripple-btn" data-scroll="#contact">
+          <span class="nav-dot"></span>
+          연락처
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Left main hero -->
+      <section class="hero-card">
+        <div class="hero-inner">
+          <div class="pill">
+            <span class="pill-dot"></span>
+            <span>Player profile</span>
+          </div>
+
+          <h1 class="hero-title">
+            안녕하세요, <span>mocakong</span> 입니다.<br />
+            집중과 분석을 즐기는 게이머입니다.
+          </h1>
+
+          <p class="hero-subtitle">
+            단순히 승리를 노리는 것에서 끝나지 않고, 플레이 흐름과 데이터를 분석해
+            다음 판을 더 잘 만들기 위해 고민합니다. 팀원과의 호흡, 전략 설계, 복기까지
+            포함한 전체적인 플레이 경험을 중요하게 생각합니다.
+          </p>
+
+          <div class="hero-meta">
+            <div class="meta-item">
+              <span class="meta-label">이름</span>
+              <span class="meta-value">mocakong</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">직업</span>
+              <span class="meta-value">게이머</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">스타일</span>
+              <span class="meta-value">전략 · 팀플레이 · 분석</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn-primary ripple-btn" data-scroll="#contact">
+              협업 / 문의하기
+            </button>
+            <button class="btn-ghost ripple-btn" data-scroll="#about">
+              더 알아보기
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right side column -->
+      <aside class="side-column">
+        <!-- About card -->
+        <section id="about" class="card-interactive">
+          <div class="card-header">
+            <span class="card-title">소개</span>
+            <span class="card-pill">Profile</span>
+          </div>
+          <p class="about-text">
+            게임을 단순한 취미가 아닌 하나의 프로젝트처럼 바라보는 게이머입니다.
+            매 판마다 플레이를 복기하고, 어떤 선택이 승패를 갈랐는지 되돌아보는 것을 좋아합니다.
+            <br /><br />
+            새로운 메타나 전략을 시험해 보고, 데이터를 기반으로 플레이 스타일을 조정하는 것을 즐깁니다.
+            혼자 게임하는 시간도 좋지만, 팀원과 함께 전략을 설계하고, 역할을 나누어
+            승리를 만들어 가는 과정에서 가장 큰 보람을 느낍니다.
+          </p>
+        </section>
+
+        <!-- Contact card -->
+        <section id="contact" class="card-interactive">
+          <div class="card-header">
+            <span class="card-title">연락처</span>
+            <span class="card-pill">Contact</span>
+          </div>
+
+          <ul class="contact-list">
+            <li>
+              <div class="contact-item-label">Email</div>
+              <a class="contact-link" href="mailto:example@example.com">
+                example@example.com
+              </a>
+            </li>
+            <li>
+              <div class="contact-item-label">GitHub</div>
+              <a class="contact-link" href="https://github.com/mocakong" target="_blank" rel="noopener noreferrer">
+                github.com/mocakong
+              </a>
+            </li>
+          </ul>
+          <hr />
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="footer-left">
+        <span>mocakong</span> · All rights reserved.<br />
+        © <span id="year"></span> mocakong. 무단 복제 및 배포를 금합니다.
+      </div>
+      <div class="footer-right">
+        <div class="footer-badge">Built for GitHub Pages</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // 동적으로 연도 표시
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // 부드러운 스크롤 이동
+    function smoothScrollTo(target) {
+      const element = document.querySelector(target);
+      if (!element) return;
+
+      const top = element.getBoundingClientRect().top + window.scrollY - 40;
+      window.scrollTo({
+        top,
+        behavior: "smooth"
+      });
+    }
+
+    // 네비게이션, 버튼 클릭 스크롤
+    document.querySelectorAll("[data-scroll]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        const target = this.getAttribute("data-scroll");
+        if (target) {
+          smoothScrollTo(target);
+        }
+      });
+    });
+
+    // 클릭 시 카드 인터랙션 (on/off)
+    document.querySelectorAll(".card-interactive").forEach(function (card) {
+      card.addEventListener("click", function () {
+        this.classList.toggle("active");
+      });
+    });
+
+    // 버튼 클릭 Ripple 효과
+    document.querySelectorAll(".ripple-btn").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        const rect = this.getBoundingClientRect();
+        const circle = document.createElement("span");
+        const diameter = Math.max(rect.width, rect.height);
+        const radius = diameter / 2;
+
+        circle.style.width = circle.style.height = diameter + "px";
+        circle.style.left = e.clientX - rect.left - radius + "px";
+        circle.style.top = e.clientY - rect.top - radius + "px";
+        circle.classList.add("ripple-circle");
+
+        // 기존 ripple 제거
+        const existingRipple = this.querySelector(".ripple-circle");
+        if (existingRipple) {
+          existingRipple.remove();
+        }
+
+        this.appendChild(circle);
+
+        setTimeout(function () {
+          circle.remove();
+        }, 650);
+      });
+    });
+  </script>
+</body>
+</html>
